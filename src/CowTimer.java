@@ -15,6 +15,10 @@ public class CowTimer {
 
 	public static void main(String[] args) throws InterruptedException {
 		/* 1. Make a CowTimer, set the time and start it. */
+		int cowTimer = 300;
+		for (int i=0; i<300; i++) {
+		}
+		
 
 	}
 
