@@ -28,7 +28,7 @@ import java.io.File;
 public class Jeopardy implements ActionListener {
 	private JButton firstButton;
 	private JButton secondButton;
-	private JButton thirdButton, fourthButton;
+	private JButton thirdButton, fourthButton, fifthButton;
 
 	private JPanel quizPanel;
 	int score = 0;
@@ -66,11 +66,21 @@ public class Jeopardy implements ActionListener {
 		
 		// 9. Use the secondButton variable to hold a button using the createButton
 		// method
-
+		secondButton=createButton("$200");
 		// 10. Add the secondButton to the quizPanel
-
+		quizPanel.add(secondButton);
 		// 11. Add action listeners to the buttons (2 lines of code)
-
+		firstButton.addActionListener(this);
+		secondButton.addActionListener(this);
+		thirdButton=createButton("$300");
+		quizPanel.add(thirdButton);
+		thirdButton.addActionListener(this);
+		fourthButton=createButton("$400");
+		quizPanel.add(fourthButton);
+		fourthButton.addActionListener(this);
+		fifthButton=createButton("$500");
+		quizPanel.add(fifthButton);
+		fifthButton.addActionListener(this);
 		// 12. Fill in the actionPerformed() method below
 
 		frame.pack();
@@ -103,46 +113,68 @@ public class Jeopardy implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		// Remove this temporary message:
-		JOptionPane.showMessageDialog(null, "pressed " + ((JButton) arg0.getSource()).getText() + " button");
-
+		
 		// Use the method that plays the jeopardy theme music.
-
+		playJeopardyTheme();
 		JButton buttonPressed = (JButton) arg0.getSource();
 		// If the buttonPressed was the firstButton
-
+		if (buttonPressed==firstButton) {
+			askQuestion("How do you spell dog", "dog", 100);
+			firstButton.setText("");
+		}
 		// Call the askQuestion() method
 
 		// Fill in the askQuestion() method. When you play the game, the score should
 		// change.
 
 		// Or if the buttonPressed was the secondButton
-
+		if (buttonPressed==secondButton) {
+			askQuestion("What is the second letter in dog?", "g", 200);
+		
 		// Call the askQuestion() method with a harder question
 
 		// Clear the button text (set the button text to nothing)
-
+		secondButton.setText("");
+		}
+		if (buttonPressed==thirdButton) {
+			askQuestion("What is the fourth letter in dog?", "c", 300);
+			thirdButton.setText("");
+		}
+		if (buttonPressed==fourthButton) {
+			askQuestion("How many dogs are there?", "d", 400);
+			fourthButton.setText("");
+		}
+		if (buttonPressed==fifthButton) {
+			askQuestion("What is the 17th letter in dog?", "q", 500);
+			fifthButton.setText("");
+		}
 	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
 		// Remove this temporary message
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
 		// Use a pop up to ask the user the question
-
+		String answer = JOptionPane.showInputDialog(question);
 		// If the answer is correct
-
+		if (correctAnswer.equals(answer)) {
+			
+		
 		// Increase the score by the prizeMoney
-
+		score = score+prizeMoney;
 		// Call the updateScore() method
-
+		updateScore();
 		// Pop up a message to tell the user they were correct
-
+		JOptionPane.showMessageDialog(null, "Good jorb you were right");
+		}
 		// Otherwise
-
+		else {
+			
 		// Decrement the score by the prizeMoney
-
+			score = score-prizeMoney;
 		// Pop up a message to tell the user the correct answer
-
+			JOptionPane.showMessageDialog(null, "wrung. The correct answer is: "+correctAnswer);
 		// Call the updateScore() method
+			updateScore();
+		}
 
 	}
 
